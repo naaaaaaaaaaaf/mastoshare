@@ -5,22 +5,7 @@ if (!is_null($referer)){
     if(preg_match("|^https?://shindanmaker\.com|", $referer)) {
         $text = $get;
     }else{
-        if($data = @file_get_contents($referer)){
-            //データ取得が成功した
-            $data = mb_convert_encoding($data, 'HTML-ENTITIES', 'ASCII, JIS, UTF-8, EUC-JP, SJIS');
-            $document = new DOMDocument();
-            $document->loadHTML($data);
-            $xmlstr = $document->saveXML();
-            $xmlobj = simplexml_load_string($xmlstr);
-            $page = json_decode(json_encode($xmlobj), true);
-            if (!$page['head']['title']) {
-                $text = $get."\n".$page['head']['title'] . " " . $referer." から #Mastoshare";
-            }else{
-                $text = $get."\n".$referer." から #Mastoshare";
-            }
-        }else{
-            $text = $get."\n".$referer." から #Mastoshare";
-        }
+        $text = $get."\n".$referer." から #Mastoshare";
     }
 }else{
     $text = $get."\n#Mastoshare";
