@@ -1,5 +1,5 @@
 <?php
-$get = isset($_GET['text']) ? $_SERVER['text'] : '';
+$get = isset($_GET['text']) ? $_GET['text'] : '';
 $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 if (!is_null($referer)){
     if(preg_match("|^https?://shindanmaker\.com|", $referer)) {
@@ -32,13 +32,14 @@ if (!is_null($referer)){
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mastoshare</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.dark.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styel.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <div class="container">
-    <h1>Mastoshare</h1>
+    <a href="https://mastoshare.net"><img src="img/mastoshare.png" class="img-fluid"></a>
     <div id="error"></div>
     <div class="card">
         <div class="card-body">
@@ -64,6 +65,7 @@ if (!is_null($referer)){
     </div>
     <button id="Toot" class="btn btn-primary">Toot</button>
     <button id="del" class="btn btn-danger">リスト全削除</button>
+
 </div>
 <script src="js/main.js"></script>
 </body>

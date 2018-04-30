@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mastoshare | ボタンの設置</title>
+    <meta name="description" content="Mastoshare(マストシェア)とはTwitter共有ボタンのようなMastodon共有ボタンです。簡単に設置が出来ます。">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.dark.min.css">
+    <link rel="stylesheet" type="text/css" href="css/top.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="mx-auto" style="max-width: 100%; width: 800px;">
+        <a href="https://mastoshare.net"><img src="img/mastoshare.png" class="mx-auto d-block top-logo"></a>
+        <h4>クイックガイド</h4>
+        <p>Mastoshareはv1.6.0以上のマストドンインスタンスで使用可能です。</p>
+        <p>このコードをHTMLコピペするだけで使用可能です。</p>
+        <textarea placeholder="これをコピペ" rows="3" class="form-control">&lt;a href="https://mastoshare.net/post.php?text=" onclick="window.open(this.href, '', 'width=500,height=400'); return false;"&gt;&lt;img src="https://mastoshare.net/img/toot.svg" width="75" height="20"&gt;&lt;/a&gt;</textarea>
+        <h4>カスタマイズ</h4>
+        <strong>トゥートさせるテキストを指定(URLエンコード必須)</strong><br>
+        <code>https://mastoshare.net/post.php?text=<テキスト></code>
+    </div>
+</div>
+</body>
+</html>
