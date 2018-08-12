@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 let target = document.getElementsByName("instance")[0];
                 target.add(option);
             } else {
-                msg="<div class=\"alert alert-danger error\" role=\"alert\">マストドンインスタンス(v1.6.0以上)ではありません</div>";
+                msg = "<div class=\"alert alert-danger error\" role=\"alert\">マストドンインスタンス(v1.6.0以上)ではありません</div>";
                 document.getElementById('error').innerHTML = msg;
             }
-        }catch (e){
-            msg="<div class=\"alert alert-danger error\" role=\"alert\">不正なアドレスです</div>";
+        } catch (e) {
+            msg = "<div class=\"alert alert-danger error\" role=\"alert\">不正なアドレスです</div>";
             document.getElementById('error').innerHTML = msg;
         }
 
@@ -42,12 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("Toot").addEventListener("click", function () {
         let text = document.getElementById("contents").value;
         let instanceUrl = document.getElementById("instance").value;
-        if (instanceUrl === ""){
-                msg="<div class=\"alert alert-danger error\" role=\"alert\">共有するインスタンスを選択してください</div>";
-                document.getElementById('error').innerHTML = msg;
-        }else {
+        if (instanceUrl === "") {
+            msg = "<div class=\"alert alert-danger error\" role=\"alert\">共有するインスタンスを選択してください</div>";
+            document.getElementById('error').innerHTML = msg;
+        } else {
             let openUrl = encodeURIComponent(text);
-            window.open("https://" + instanceUrl + "/share?text=" + openUrl, '_blank');
+            location.href = "https://" + instanceUrl + "/share?text=" + openUrl;
         }
     });
     document.getElementById("del").addEventListener("click", function () {
