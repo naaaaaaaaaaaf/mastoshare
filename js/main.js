@@ -25,20 +25,28 @@ function check(_url) {
 document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("addlistbtn").addEventListener("click", function () {
-        var addInstanceurl = document.getElementById("addlist").value;
-        var checkUrl = "https://" + document.getElementById("addlist").value + "/api/v1/instance";
+        let addInstanceUrl = document.getElementById("addlist").value;
+        let checkUrl = "https://" + document.getElementById("addlist").value + "/api/v1/instance";
+        let instancesList = document.getElementById("instance");
+        for (let i = 0; i < instancesList.length; ++i) {
+            if (addInstanceUrl == instancesList[i].value) {
+                msg = "<div class=\"alert alert-danger error\" role=\"alert\">すでに登録されています</div>";
+                document.getElementById('error').innerHTML = msg;
+                return;
+            }
+        }
         try {
             if (check(checkUrl) === 200) {
                 let option = document.createElement("option");
-                option.value = addInstanceurl;
-                option.text = addInstanceurl;
+                option.value = addInstanceUrl;
+                option.text = addInstanceUrl;
                 let listNumber = localStorage.length;
                 if (localStorage.getItem("lastSelected") != null) {
                     listNumber -= 1;
                 }
-                localStorage.setItem(listNumber.toString(), addInstanceurl);
-                let target = document.getElementsByName("instance")[0];
-                target.add(option);
+                localStorage.setItem(listNumber.toString(), addInstanceUrl);
+                document.getElementById("instance").add(option);
+                document.getElementById('error').innerHTML = "";
             } else {
                 msg = "<div class=\"alert alert-danger error\" role=\"alert\">マストドンインスタンス(v1.6.0以上)ではありません</div>";
                 document.getElementById('error').innerHTML = msg;
@@ -47,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
             msg = "<div class=\"alert alert-danger error\" role=\"alert\">不正なアドレスです</div>";
             document.getElementById('error').innerHTML = msg;
         }
-
     });
 
     document.getElementById("Toot").addEventListener("click", function () {
@@ -62,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             location.href = "https://" + instanceUrl + "/share?text=" + openUrl;
         }
     });
+
     document.getElementById("del").addEventListener("click", function () {
         localStorage.clear();
         load();
