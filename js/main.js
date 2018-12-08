@@ -22,6 +22,32 @@ function check(_url) {
     xhr.send(null);
     return xhr.status;
 }
+let errorTimer = null;
+function showError(msg) {
+    let error = document.getElementById('error');
+    if (msg == null) { // clear error immediately
+        error.innerHTML = "";
+        clearTimeout(errorTimer);
+        errorTimer = null;
+        return;
+    }
+    let elem = "<div class=\"alert alert-danger error\" role=\"alert\">" + msg + "</div>";
+    error.innerHTML = elem;
+    error.style.opacity = 1.0;
+    if (errorTimer == null) {
+        var obsolescence = function () {
+            error.style.opacity -= 0.025;
+            if (error.style.opacity < 0.025) {
+                showError(null);
+            }
+            else {
+                ratio = (1.0 - error.style.opacity) * 20;
+                errorTimer = setTimeout(obsolescence, 500 / ratio);
+            }
+        }
+        errorTimer = setTimeout(obsolescence, 500);
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("addlistbtn").addEventListener("click", function () {
@@ -30,8 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let instancesList = document.getElementById("instance");
         for (let i = 0; i < instancesList.length; ++i) {
             if (addInstanceUrl == instancesList[i].value) {
-                msg = "<div class=\"alert alert-danger error\" role=\"alert\">すでに登録されています</div>";
-                document.getElementById('error').innerHTML = msg;
+                showError("すでに登録されています");
                 return;
             }
         }
@@ -46,14 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 localStorage.setItem(listNumber.toString(), addInstanceUrl);
                 document.getElementById("instance").add(option);
-                document.getElementById('error').innerHTML = "";
+                showError(null); // clear the previous error
             } else {
-                msg = "<div class=\"alert alert-danger error\" role=\"alert\">マストドンインスタンス(v1.6.0以上)ではありません</div>";
-                document.getElementById('error').innerHTML = msg;
+                showError("マストドンインスタンス(v1.6.0以上)ではありません");
             }
         } catch (e) {
-            msg = "<div class=\"alert alert-danger error\" role=\"alert\">不正なアドレスです</div>";
-            document.getElementById('error').innerHTML = msg;
+            showError("不正なアドレスです");
         }
     });
 
@@ -61,8 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let text = document.getElementById("contents").value;
         let instanceUrl = document.getElementById("instance").value;
         if (instanceUrl === "") {
-            msg = "<div class=\"alert alert-danger error\" role=\"alert\">共有するインスタンスを選択してください</div>";
-            document.getElementById('error').innerHTML = msg;
+            showError("共有するインスタンスを選択してください");
         } else {
             localStorage.setItem("lastSelected", instanceUrl);
             let openUrl = encodeURIComponent(text);
