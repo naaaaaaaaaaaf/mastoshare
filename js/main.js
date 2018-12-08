@@ -70,7 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     listNumber -= 1;
                 }
                 localStorage.setItem(listNumber.toString(), addInstanceUrl);
-                document.getElementById("instance").add(option);
+                instancesList.add(option);
+                instancesList.value = addInstanceUrl; // select added instance
+                document.getElementById("addlist").value = ""; // clear the input
                 showError(null); // clear the previous error
             } else {
                 showError("マストドンインスタンス(v1.6.0以上)ではありません");
