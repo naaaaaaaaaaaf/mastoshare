@@ -64,7 +64,7 @@ function showError(msg) {
     error.innerHTML = elem;
     error.style.opacity = 1.0;
     if (errorTimer == null) {
-        var obsolescence = function () {
+        let obsolescence = function () {
             error.style.opacity -= 0.025;
             if (error.style.opacity < 0.025) {
                 showError(null);
