@@ -1,19 +1,48 @@
 console.log("Mastoshare Ver 2.0.0 alpha!");
 load();
 function load() {
-    let an = "<option value=\"mstdn.jp\">mstdn.jp</option><option value=\"friends.nico\">friends.nico</option><option value=\"pawoo.net\">pawoo.net</option>";
-    let length = localStorage.length;
+    migrateDataModel();
+    let elem = "";
+    let instances = loadInstances();
+    if (instances.length == 0) {
+        // add default instances
+        instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+        saveInstances(instances);
+    }
     let lastSelect = localStorage.getItem("lastSelected");
-    if (lastSelect != null) {
-        length -= 1;
-    }
-    for (let i = 0; i < length; ++i) {
-        let instance = localStorage[i];
+    instances.forEach(function(instance) {
         let selected = lastSelect == instance ? " selected='selected'" : "";
-        an += "<option value='" + instance + "'" + selected + ">" + instance + "</option>";
-
+        elem += "<option value='" + instance + "'" + selected + ">" + instance + "</option>";
+    })
+    document.getElementById('instance').innerHTML = elem;
+}
+function migrateDataModel() {
+    switch (parseInt(localStorage.getItem("version")) || 0) {
+        case 0:
+            let instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+            for (let i = 0; i < localStorage.length; ++i) {
+                instances.push(localStorage.getItem(i));
+                localStorage.removeItem(i)
+            }
+            saveInstances(instances);
+            break;
+        default:
+            console.log(parseInt(localStorage.getItem("version")) || 0);
     }
-    document.getElementById('instance').innerHTML = an;
+    localStorage.setItem("version", "1")
+}
+function loadInstances() {
+    try {
+        return JSON.parse(localStorage.getItem("instances"));
+    } catch (e) {
+        console.log(e.msg);
+        console.log("instances deserialization failed. delete old configuration.");
+        localStorage.removeItem("instances");
+        return [];
+    }
+}
+function saveInstances(instances) {
+    localStorage.setItem("instances", JSON.stringify(instances));
 }
 function check(_url) {
     let xhr;
@@ -52,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("addlistbtn").addEventListener("click", function () {
         let addInstanceUrl = document.getElementById("addlist").value;
-        let checkUrl = "https://" + document.getElementById("addlist").value + "/api/v1/instance";
+        let checkUrl = "https://" + addInstanceUrl + "/api/v1/instance";
         let instancesList = document.getElementById("instance");
         for (let i = 0; i < instancesList.length; ++i) {
             if (addInstanceUrl == instancesList[i].value) {
@@ -62,14 +91,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         try {
             if (check(checkUrl) === 200) {
+                instances = loadInstances()
+                instances.push(addInstanceUrl)
+                saveInstances(instances);
+                // reflect into user interface
                 let option = document.createElement("option");
                 option.value = addInstanceUrl;
                 option.text = addInstanceUrl;
-                let listNumber = localStorage.length;
-                if (localStorage.getItem("lastSelected") != null) {
-                    listNumber -= 1;
-                }
-                localStorage.setItem(listNumber.toString(), addInstanceUrl);
                 instancesList.add(option);
                 instancesList.value = addInstanceUrl; // select added instance
                 document.getElementById("addlist").value = ""; // clear the input
