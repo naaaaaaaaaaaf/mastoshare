@@ -1,11 +1,48 @@
 console.log("Mastoshare Ver 2.0.0 alpha!");
 load();
 function load() {
-    var an = "<option value=\"mstdn.jp\">mstdn.jp</option><option value=\"friends.nico\">friends.nico</option><option value=\"pawoo.net\">pawoo.net</option>";
-    for (var i = 0, length = localStorage.length; i < length; ++i) {
-        an += "<option value='" + localStorage[i] + "'>" + localStorage[i] + "</option>";
+    migrateDataModel();
+    let elem = "";
+    let instances = loadInstances();
+    if (instances.length == 0) {
+        // add default instances
+        instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+        saveInstances(instances);
     }
-    document.getElementById('instance').innerHTML = an;
+    let lastSelect = localStorage.getItem("lastSelected");
+    instances.forEach(function(instance) {
+        let selected = lastSelect == instance ? " selected='selected'" : "";
+        elem += "<option value='" + instance + "'" + selected + ">" + instance + "</option>";
+    })
+    document.getElementById('instance').innerHTML = elem;
+}
+function migrateDataModel() {
+    switch (parseInt(localStorage.getItem("version")) || 0) {
+        case 0:
+            let instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+            for (let i = 0; i < localStorage.length; ++i) {
+                instances.push(localStorage.getItem(i));
+                localStorage.removeItem(i)
+            }
+            saveInstances(instances);
+            break;
+        default:
+            console.log(parseInt(localStorage.getItem("version")) || 0);
+    }
+    localStorage.setItem("version", "1")
+}
+function loadInstances() {
+    try {
+        return JSON.parse(localStorage.getItem("instances"));
+    } catch (e) {
+        console.log(e.msg);
+        console.log("instances deserialization failed. delete old configuration.");
+        localStorage.removeItem("instances");
+        return [];
+    }
+}
+function saveInstances(instances) {
+    localStorage.setItem("instances", JSON.stringify(instances));
 }
 function check(_url) {
     let xhr;
@@ -14,42 +51,77 @@ function check(_url) {
     xhr.send(null);
     return xhr.status;
 }
+let errorTimer = null;
+function showError(msg) {
+    let error = document.getElementById('error');
+    if (msg == null) { // clear error immediately
+        error.innerHTML = "";
+        clearTimeout(errorTimer);
+        errorTimer = null;
+        return;
+    }
+    let elem = "<div class=\"alert alert-danger error\" role=\"alert\">" + msg + "</div>";
+    error.innerHTML = elem;
+    error.style.opacity = 1.0;
+    if (errorTimer == null) {
+        let obsolescence = function () {
+            error.style.opacity -= 0.025;
+            if (error.style.opacity < 0.025) {
+                showError(null);
+            }
+            else {
+                ratio = (1.0 - error.style.opacity) * 20;
+                errorTimer = setTimeout(obsolescence, 500 / ratio);
+            }
+        }
+        errorTimer = setTimeout(obsolescence, 500);
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("addlistbtn").addEventListener("click", function () {
-        var addInstanceurl = document.getElementById("addlist").value;
-        var checkUrl = "https://" + document.getElementById("addlist").value + "/api/v1/instance";
+        let addInstanceUrl = document.getElementById("addlist").value;
+        let checkUrl = "https://" + addInstanceUrl + "/api/v1/instance";
+        let instancesList = document.getElementById("instance");
+        for (let i = 0; i < instancesList.length; ++i) {
+            if (addInstanceUrl == instancesList[i].value) {
+                showError("すでに登録されています");
+                return;
+            }
+        }
         try {
             if (check(checkUrl) === 200) {
+                instances = loadInstances()
+                instances.push(addInstanceUrl)
+                saveInstances(instances);
+                // reflect into user interface
                 let option = document.createElement("option");
-                option.value = addInstanceurl;
-                option.text = addInstanceurl;
-                let listNumber = localStorage.length.toString();
-                localStorage.setItem(listNumber, addInstanceurl);
-                let target = document.getElementsByName("instance")[0];
-                target.add(option);
+                option.value = addInstanceUrl;
+                option.text = addInstanceUrl;
+                instancesList.add(option);
+                instancesList.value = addInstanceUrl; // select added instance
+                document.getElementById("addlist").value = ""; // clear the input
+                showError(null); // clear the previous error
             } else {
-                msg = "<div class=\"alert alert-danger error\" role=\"alert\">マストドンインスタンス(v1.6.0以上)ではありません</div>";
-                document.getElementById('error').innerHTML = msg;
+                showError("マストドンインスタンス(v1.6.0以上)ではありません");
             }
         } catch (e) {
-            msg = "<div class=\"alert alert-danger error\" role=\"alert\">不正なアドレスです</div>";
-            document.getElementById('error').innerHTML = msg;
+            showError("不正なアドレスです");
         }
-
     });
 
     document.getElementById("Toot").addEventListener("click", function () {
         let text = document.getElementById("contents").value;
         let instanceUrl = document.getElementById("instance").value;
         if (instanceUrl === "") {
-            msg = "<div class=\"alert alert-danger error\" role=\"alert\">共有するインスタンスを選択してください</div>";
-            document.getElementById('error').innerHTML = msg;
+            showError("共有するインスタンスを選択してください");
         } else {
+            localStorage.setItem("lastSelected", instanceUrl);
             let openUrl = encodeURIComponent(text);
             location.href = "https://" + instanceUrl + "/share?text=" + openUrl;
         }
     });
+
     document.getElementById("del").addEventListener("click", function () {
         localStorage.clear();
         load();
