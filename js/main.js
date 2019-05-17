@@ -6,7 +6,7 @@ function load() {
     let instances = loadInstances();
     if (instances.length == 0) {
         // add default instances
-        instances = ["mstdn.jp", "pawoo.net"];
+        instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
         saveInstances(instances);
     }
     let lastSelect = localStorage.getItem("lastSelected");
