@@ -6,7 +6,7 @@ function load() {
     let instances = loadInstances();
     if (instances.length == 0) {
         // add default instances
-        instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+        instances = ["mstdn.jp", "pawoo.net"];
         saveInstances(instances);
     }
     let lastSelect = localStorage.getItem("lastSelected");
@@ -19,7 +19,7 @@ function load() {
 function migrateDataModel() {
     switch (parseInt(localStorage.getItem("version")) || 0) {
         case 0:
-            let instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
+            let instances = ["mstdn.jp", "pawoo.net"];
             for (let i = 0; i < localStorage.length; ++i) {
                 instances.push(localStorage.getItem(i));
                 localStorage.removeItem(i)
