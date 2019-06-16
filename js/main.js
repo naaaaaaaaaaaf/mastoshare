@@ -6,36 +6,30 @@ function load() {
     let instances = loadInstances();
     if (instances.length == 0) {
         // add default instances
-        instances = ["mstdn.jp", "pawoo.net"];
+        instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
         saveInstances(instances);
     }
     let lastSelect = localStorage.getItem("lastSelected");
-    instances.forEach(function (instance) {
+    instances.forEach(function(instance) {
         let selected = lastSelect == instance ? " selected='selected'" : "";
         elem += "<option value='" + instance + "'" + selected + ">" + instance + "</option>";
     })
     document.getElementById('instance').innerHTML = elem;
 }
 function migrateDataModel() {
-    let instances = ["mstdn.jp", "pawoo.net"];
     switch (parseInt(localStorage.getItem("version")) || 0) {
         case 0:
+            let instances = ["mstdn.jp", "friends.nico", "pawoo.net"];
             for (let i = 0; i < localStorage.length; ++i) {
                 instances.push(localStorage.getItem(i));
                 localStorage.removeItem(i)
             }
             saveInstances(instances);
             break;
-        case 1:
-            if (instances.indexOf("friends.nico") >= 0) {
-                instances.splice(instances.indexOf("friends.nico"))
-            }
-            saveInstances(instances);
-            break;
         default:
             console.log(parseInt(localStorage.getItem("version")) || 0);
     }
-    localStorage.setItem("version", "2")
+    localStorage.setItem("version", "1")
 }
 function loadInstances() {
     try {
