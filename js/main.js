@@ -17,9 +17,9 @@ function load() {
     document.getElementById('instance').innerHTML = elem;
 }
 function migrateDataModel() {
-    let instances = ["mstdn.jp", "pawoo.net"];
     switch (parseInt(localStorage.getItem("version")) || 0) {
         case 0:
+            let instances = ["mstdn.jp", "pawoo.net"];
             for (let i = 0; i < localStorage.length; ++i) {
                 instances.push(localStorage.getItem(i));
                 localStorage.removeItem(i)
@@ -27,10 +27,11 @@ function migrateDataModel() {
             saveInstances(instances);
             break;
         case 1:
-            if (instances.indexOf("friends.nico") >= 0) {
-                instances.splice(instances.indexOf("friends.nico"))
+            let oldinstances = loadInstances();
+            if (oldinstances.indexOf("friends.nico") >= 0) {
+                oldinstances.splice(oldinstances.indexOf("friends.nico"), 1);
             }
-            saveInstances(instances);
+            saveInstances(oldinstances);
             break;
         default:
             console.log(parseInt(localStorage.getItem("version")) || 0);
