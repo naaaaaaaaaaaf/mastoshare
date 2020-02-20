@@ -3,12 +3,12 @@ $get = isset($_GET['text']) ? $_GET['text'] : '';
 $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 if (!is_null($referer)){
     if(preg_match("|^https?://shindanmaker\.com|", $referer)) {
-        $text = $get;
+        $text = htmlspecialchars($get, ENT_QUOTES);
     }else{
         $text = $get."\n".$referer." から #Mastoshare";
     }
 }else{
-    $text = $get."\n#Mastoshare";
+    $text =     $text = htmlspecialchars($get, ENT_QUOTES)."\n#Mastoshare";
 }
 
 ?>
