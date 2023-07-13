@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function ShareComponent() {
+    const [showAddForm, setShowAddForm] = useState(false);
     const [combinedValue, setCombinedValue] = useState('');
     const [mastodonInstance, setMastodonInstance] = useState('');
     const [newMastodonInstance, setNewMastodonInstance] = useState('');
@@ -32,6 +33,8 @@ function ShareComponent() {
         const urlText = getParameterByName('text', location.search) || '';
         const urlReferrer = getParameterByName('url', location.search) || '';
         setCombinedValue(`${urlText}\n${urlReferrer}`);
+
+        if (savedInstances && savedInstances.length === 0) setShowAddForm(true);
     }, [location]);
 
     const handleAddNewInstance = () => {
@@ -72,37 +75,54 @@ function ShareComponent() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="max-w-md w-full bg-white p-4 rounded-md shadow-md">
-                <h1 className="text-2xl font-bold">Share to Mastodon</h1>
                 <textarea
                     className="w-full p-2 border rounded-md"
                     rows={4}
                     value={combinedValue}
                     onChange={(e) => setCombinedValue(e.target.value)}
                 />
-                <select
-                    className="w-full mt-4 p-2 border rounded-md"
-                    value={mastodonInstance}
-                    onChange={(e) => setMastodonInstance(e.target.value)}
-                >
-                    {instancesList.map((instance, index) => (
-                        <option key={index} value={instance}>
-                            {instance}
-                        </option>
-                    ))}
-                </select>
-                <div className="flex justify-between mt-4">
-                    <input
-                        className="flex-grow mr-2 p-2 border rounded-md"
-                        value={newMastodonInstance}
-                        onChange={(e) => setNewMastodonInstance(e.target.value)}
-                    />
-                    <button
-                        className="p-2 bg-blue-500 text-white rounded-md"
-                        onClick={handleAddNewInstance}
-                    >
-                        Add
-                    </button>
-                </div>
+
+                {instancesList.length > 0 ? (
+                    <>
+                        <select
+                            className="w-full mt-4 p-2 border rounded-md"
+                            value={mastodonInstance}
+                            onChange={(e) => setMastodonInstance(e.target.value)}
+                        >
+                            {instancesList.map((instance, index) => (
+                                <option key={index} value={instance}>
+                                    {instance}
+                                </option>
+                            ))}
+                        </select>
+                        {!showAddForm ? (
+                            <p className="mt-4 text-blue-500 cursor-pointer" onClick={() => setShowAddForm(true)}>
+                                Not in the list
+                            </p>
+                        ) : (
+                            <p className="mt-4 text-blue-500 cursor-pointer" onClick={() => setShowAddForm(false)}>
+                                Hide form
+                            </p>
+                        )}
+                    </>
+                ) : null}
+
+                {showAddForm && (
+                    <div className="flex justify-between mt-4">
+                        <input
+                            className="flex-grow mr-2 p-2 border rounded-md"
+                            value={newMastodonInstance}
+                            onChange={(e) => setNewMastodonInstance(e.target.value)}
+                        />
+                        <button
+                            className="p-2 bg-blue-500 text-white rounded-md"
+                            onClick={handleAddNewInstance}
+                        >
+                            Add
+                        </button>
+                    </div>
+                )}
+
                 {addInstanceError && <p className="text-red-500">{addInstanceError}</p>}
                 <button
                     className="w-full mt-4 p-2 bg-blue-500 text-white rounded-md"
