@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { handleAddNewInstance } from './utils';
 
 function SettingsComponent() {
   const [instancesList, setInstancesList] = useState([]);
   const [newMastodonInstance, setNewMastodonInstance] = useState('');
   const [preferredInstance, setPreferredInstance] = useState('');
+  const [addInstanceError, setAddInstanceError] = useState(null);
 
   useEffect(() => {
     const savedInstances = JSON.parse(localStorage.getItem('instancesList'));
@@ -18,10 +20,7 @@ function SettingsComponent() {
   }, []);
 
   const handleAddInstance = () => {
-    const updatedInstances = [...instancesList, newMastodonInstance];
-    setInstancesList(updatedInstances);
-    localStorage.setItem('instancesList', JSON.stringify(updatedInstances));
-    setNewMastodonInstance('');
+    handleAddNewInstance(newMastodonInstance, instancesList, setInstancesList, setAddInstanceError);
   }
 
   const handleRemoveInstance = (instanceToRemove) => {
@@ -41,14 +40,19 @@ function SettingsComponent() {
         <h1 className="text-2xl font-bold mb-4">Settings</h1>
 
         <h2 className="text-xl mb-2">Instances</h2>
-        {instancesList.map((instance, index) => (
-          <div key={index} className="flex items-center mb-2">
-            <span className="mr-4">{instance}</span>
-            <button className="mr-2 bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleRemoveInstance(instance)}>Remove</button>
-            <button className="bg-green-500 text-white px-2 py-1 rounded" onClick={() => handleSetPreferredInstance(instance)}>Set as preferred</button>
-          </div>
-        ))}
-
+        <table className="table-auto">
+          <tbody>
+            {instancesList.map((instance, index) => (
+              <tr key={index}>
+                <td><span className="mr-4">{instance}</span></td>
+                <td><button className="mr-2 bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleRemoveInstance(instance)}>Remove</button></td>
+                <td><button className="bg-green-500 text-white px-2 py-1 rounded" onClick={() => handleSetPreferredInstance(instance)}>Set as preferred</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h3 className="text-lg">Add new Mastodon instance</h3>
+        {addInstanceError && <p className="text-red-500">{addInstanceError}</p>}
         <div className="flex items-center mt-4">
           <input
             type="text"
