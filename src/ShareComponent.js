@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ShareComponent() {
     const [showAddForm, setShowAddForm] = useState(false);
@@ -28,7 +29,10 @@ function ShareComponent() {
         // ローカルストレージからMastodonインスタンスのURLを取得
         const savedInstances = JSON.parse(localStorage.getItem('instancesList'));
         if (savedInstances) setInstancesList(savedInstances);
-
+        const savedPreferredInstance = localStorage.getItem('preferredInstance');
+        if (savedPreferredInstance) {
+            setMastodonInstance(savedPreferredInstance);
+        }
         // テキストパラメータとリファラー（アクセス元URL）を取得して設定
         const urlText = getParameterByName('text', location.search) || '';
         const urlReferrer = getParameterByName('url', location.search) || '';
@@ -130,6 +134,9 @@ function ShareComponent() {
                 >
                     Share
                 </button>
+                <Link to="/settings" className="mt-4 p-2 bg-blue-500 text-white rounded-md block text-center">
+                    Settings
+                </Link>
             </div>
         </div>
 
