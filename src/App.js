@@ -8,6 +8,7 @@ function App() {
     <Router>
       <Routes>
       <Route path="/share" element={<ShareComponent />} />
+      <Route path="/share.php" element={<ShareComponent />} />
       <Route path="/settings" element={<SettingsComponent />} />
         {/* 他のルートをここに追加します */}
       </Routes>
