@@ -28,8 +28,12 @@ function SettingsComponent() {
     const updatedInstances = instancesList.filter(instance => instance !== instanceToRemove);
     setInstancesList(updatedInstances);
     localStorage.setItem('instancesList', JSON.stringify(updatedInstances));
-  }
-
+    
+    if (instanceToRemove === preferredInstance) {
+        setPreferredInstance('');
+        localStorage.removeItem('preferredInstance');
+    }
+}
   const handleSetPreferredInstance = (instance) => {
     setPreferredInstance(instance);
     localStorage.setItem('preferredInstance', instance);
