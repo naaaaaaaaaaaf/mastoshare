@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mastoshare/static/css/main.ef5e81b2.css",
+    "main.js": "/mastoshare/static/js/main.1d5466d5.js",
+    "static/js/787.7f5d304e.chunk.js": "/mastoshare/static/js/787.7f5d304e.chunk.js",
+    "index.html": "/mastoshare/index.html",
+    "main.ef5e81b2.css.map": "/mastoshare/static/css/main.ef5e81b2.css.map",
+    "main.1d5466d5.js.map": "/mastoshare/static/js/main.1d5466d5.js.map",
+    "787.7f5d304e.chunk.js.map": "/mastoshare/static/js/787.7f5d304e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef5e81b2.css",
+    "static/js/main.1d5466d5.js"
+  ]
+}
