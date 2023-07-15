@@ -40,6 +40,8 @@ function SettingsComponent() {
             setAddInstanceError,
             setSuccessMessage,
         );
+        // フォームの入力フィールドをクリアする
+        setNewMastodonInstance('');
     };
 
     const handleRemoveInstance = (instanceToRemove) => {

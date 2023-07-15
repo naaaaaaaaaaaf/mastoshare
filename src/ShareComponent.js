@@ -67,6 +67,10 @@ function ShareComponent() {
             setAddInstanceError,
             setSuccessMessage,
         );
+        // 新しく追加したインスタンスを選択する
+        setMastodonInstance(newMastodonInstance);
+        // フォームの入力フィールドをクリアする
+        setNewMastodonInstance('');
     };
 
     useEffect(() => {
