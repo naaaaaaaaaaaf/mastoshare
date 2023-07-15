@@ -11,11 +11,30 @@
        "parameterTableDescriptionButton": "Text on the button",
        "parameterTableRequired": "Required"
     },
+    "settings":{
+        "title": "Settings",
+        "instance": "Instances",
+        "addInstance": "Add new instance",
+        "removeInstance": "Remove",
+        "setPreferredInstance": "Set as preferred",
+        "preferredInstance": "Preferred instance"
+    },
+    "share":{
+        "title": "Trying to share…",
+        "selectInstance": "Select instance to share",
+        "notListed": "Not listed?",
+        "hideForm": "Hide form",
+        "share": "Share"
+    },
     "general": {
-        "settings": "Setting",
+        "settings": "Settings",
         "add": "Add",
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "addInstance": "Add new instance",
+        "addInstanceErrorVersion": "Mastodon instance version is below 1.6.0",
+        "addInstanceError": "Failed to fetch Mastodon instance information",
+        "addInstanceSuccess": "Successfully instance added"
     }
 }
    

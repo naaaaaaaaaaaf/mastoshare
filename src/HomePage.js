@@ -100,7 +100,9 @@ function HomePage() {
                 </Link>
                 <div className="flex justify-center">
                     <a
-                        href="google.com"
+                        href="https://github.com/naaaaaaaaaaaf/mastoshare"
+                        target="_blank"
+                        rel="noreferrer"
                         className="mt-2 text-gray-500 hover:underline flex items-center"
                     >
                         <BsGithub className="mr-1" />

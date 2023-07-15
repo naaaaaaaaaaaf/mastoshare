@@ -11,10 +11,29 @@
        "parameterTableDescriptionButton": "ボタン上のテキスト",
        "parameterTableRequired": "必須"
     },
+    "settings":{
+        "title": "設定",
+        "instance": "インスタンス",
+        "addInstance": "インスタンスを追加",
+        "removeInstance": "削除",
+        "setPreferredInstance": "優先に設定",
+        "preferredInstance": "優先インスタンス"
+    },
+    "share":{
+        "title": "共有しようとしています…",
+        "selectInstance": "共有するインスタンスを選択してください",
+        "notListed": "リストにありませんか？",
+        "hideForm": "フォームを隠す",
+        "share": "共有"
+    },
     "general": {
         "settings": "設定",
         "add": "追加",
         "yes": "はい",
-        "no": "いいえ"
+        "no": "いいえ",
+        "addInstance": "インスタンスを追加",
+        "addInstanceErrorVersion": "Mastodonのバージョンが1.6.0未満です。",
+        "addInstanceError": "Mastodonインスタンス情報の取得に失敗しました。",
+        "addInstanceSuccess": "Mastodonインスタンスを追加しました。"
     }
 }
