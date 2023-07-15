@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { handleAddNewInstance } from './utils';
+import { BsFillGearFill,BsMastodon,BsPlusLg,BsStarFill } from "react-icons/bs";
 
 function SettingsComponent() {
   const [instancesList, setInstancesList] = useState([]);
@@ -37,9 +38,9 @@ function SettingsComponent() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full bg-white p-4 rounded-md shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Settings</h1>
+      <h1 className="text-2xl font-bold mb-4 flex items-center"><BsFillGearFill className='mr-1'/>Settings</h1>
 
-        <h2 className="text-xl mb-2">Instances</h2>
+        <h2 className="text-xl mb-2 flex items-center"><BsMastodon className='mr-1'/>Instances</h2>
         <table className="table-auto">
           <tbody>
             {instancesList.map((instance, index) => (
@@ -51,9 +52,9 @@ function SettingsComponent() {
             ))}
           </tbody>
         </table>
-        <h3 className="text-lg">Add new Mastodon instance</h3>
+        <h3 className="text-lg mt-4 flex items-center"><BsPlusLg className='mr-1'/>Add new Mastodon instance</h3>
         {addInstanceError && <p className="text-red-500">{addInstanceError}</p>}
-        <div className="flex items-center mt-4">
+        <div className="flex items-center mt-2">
           <input
             type="text"
             className="flex-grow mr-2 p-2 border rounded-md"
@@ -64,8 +65,8 @@ function SettingsComponent() {
           <button className="p-2 bg-blue-500 text-white rounded-md" onClick={handleAddInstance}>Add</button>
         </div>
 
-        <h2 className="text-xl my-2">Preferred Instance</h2>
-        <p className="text-blue-500">{preferredInstance}</p>
+        <h2 className="text-xl mt-4 mb-2 flex items-center"><BsStarFill className='mr-1'/>Preferred Instance</h2>
+        <p>{preferredInstance}</p>
       </div>
     </div>
   );
