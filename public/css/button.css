@@ -3,12 +3,12 @@
     display: inline-block;
     font: bold 11px Arial;
     color: #ffffff;
-    background-color: #6364ff;
+    background-color: #6364FF;
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 5px;
 }
 
 .mastoshare-button:hover {
-    background-color: #563acc;
+    background-color: #563ACC;
 }
