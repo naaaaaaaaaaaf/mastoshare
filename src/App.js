@@ -10,7 +10,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/share" element={<ShareComponent />} />
-                <Route path="/share.php" element={<ShareComponent />} />
+                <Route path="/post.php" element={<ShareComponent />} />
                 <Route path="/settings" element={<SettingsComponent />} />
             </Routes>
         </Router>
