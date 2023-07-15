@@ -11,7 +11,7 @@ function HomePage() {
     const openShareWindow = (event) => {
         event.preventDefault();
         window.open(
-            'http://localhost:3000/share?text=Hello Mastoshare!&url=https://mastoshare.net',
+            'https://mastoshare.net/share?text=Hello Mastoshare!&url=https://mastoshare.net',
             '_blank',
             'width=500,height=600',
         );
@@ -28,7 +28,7 @@ function HomePage() {
                 <div className="flex justify-center mb-4">
                     <a
                         className="mastoshare-button text-center"
-                        href="http://localhost:3000/share?text=Hello Mastoshare!&url=https://mastoshare.net"
+                        href="https://mastoshare.net/share?text=Hello Mastoshare!&url=https://mastoshare.net"
                         onClick={openShareWindow}
                     >
                         Toot!
