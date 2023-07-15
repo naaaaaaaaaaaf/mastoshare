@@ -56,7 +56,7 @@ function ShareComponent() {
         const urlReferrer = getParameterByName('url', location.search) || '';
         setCombinedValue(`${urlText}\n${urlReferrer}`);
 
-        if (savedInstances && savedInstances.length === 0) setShowAddForm(true);
+        if (!savedInstances || savedInstances.length === 0) setShowAddForm(true);
     }, [location]);
 
     const handleAddInstance = () => {
