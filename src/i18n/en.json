@@ -1,0 +1,21 @@
+{
+    "homepage": {
+       "title": "Mastoshare",
+       "description": "Mastoshare is a share button service for Mastodon. You can seamlessly share your favorite content to instances. You can manage instances to share on the settings page and set your preferred instances.",
+       "embedTitle": "How to embed on your site",
+       "parameterTitle": "Parameter Options",
+       "parameterTableParameterText": "Parameter",
+       "parameterTableDescription": "Description",
+       "parameterTableDescriptionText": "Text to share",
+       "parameterTableDescriptionUrl": "URL to share",
+       "parameterTableDescriptionButton": "Text on the button",
+       "parameterTableRequired": "Required"
+    },
+    "general": {
+        "settings": "Setting",
+        "add": "Add",
+        "yes": "Yes",
+        "no": "No"
+    }
+}
+   

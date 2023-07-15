@@ -1,0 +1,20 @@
+{
+    "homepage": {
+       "title": "Mastoshare",
+       "description": "MastoshareはMastodon向けのシェアボタンサービスです。お気に入りのコンテンツをインスタンスにシームレスに共有できます。設定ページで共有するインスタンスを管理し、お好みのインスタンスを設定できます。",
+       "embedTitle": "あなたのサイトに埋め込む方法",
+       "parameterTitle": "パラメーターオプション",
+       "parameterTableParameterText": "パラメーター",
+       "parameterTableDescription": "説明",
+       "parameterTableDescriptionText": "共有するテキスト",
+       "parameterTableDescriptionUrl": "共有するURL",
+       "parameterTableDescriptionButton": "ボタン上のテキスト",
+       "parameterTableRequired": "必須"
+    },
+    "general": {
+        "settings": "設定",
+        "add": "追加",
+        "yes": "はい",
+        "no": "いいえ"
+    }
+}
