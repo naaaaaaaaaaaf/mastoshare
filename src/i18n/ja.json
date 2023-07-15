@@ -1,17 +1,17 @@
 {
     "homepage": {
-       "title": "Mastoshare",
-       "description": "MastoshareはMastodon向けのシェアボタンサービスです。お気に入りのコンテンツをインスタンスにシームレスに共有できます。設定ページで共有するインスタンスを管理し、お好みのインスタンスを設定できます。",
-       "embedTitle": "あなたのサイトに埋め込む方法",
-       "parameterTitle": "パラメーターオプション",
-       "parameterTableParameterText": "パラメーター",
-       "parameterTableDescription": "説明",
-       "parameterTableDescriptionText": "共有するテキスト",
-       "parameterTableDescriptionUrl": "共有するURL",
-       "parameterTableDescriptionButton": "ボタン上のテキスト",
-       "parameterTableRequired": "必須"
+        "title": "Mastoshare",
+        "description": "MastoshareはMastodon向けのシェアボタンサービスです。お気に入りのコンテンツをインスタンスにシームレスに共有できます。設定ページで共有するインスタンスを管理し、お好みのインスタンスを設定できます。",
+        "embedTitle": "あなたのサイトに埋め込む方法",
+        "parameterTitle": "パラメーターオプション",
+        "parameterTableParameterText": "パラメーター",
+        "parameterTableDescription": "説明",
+        "parameterTableDescriptionText": "共有するテキスト",
+        "parameterTableDescriptionUrl": "共有するURL",
+        "parameterTableDescriptionButton": "ボタン上のテキスト",
+        "parameterTableRequired": "必須"
     },
-    "settings":{
+    "settings": {
         "title": "設定",
         "instance": "インスタンス",
         "addInstance": "インスタンスを追加",
@@ -19,7 +19,7 @@
         "setPreferredInstance": "優先に設定",
         "preferredInstance": "優先インスタンス"
     },
-    "share":{
+    "share": {
         "title": "共有しようとしています…",
         "selectInstance": "共有するインスタンスを選択してください",
         "notListed": "リストにありませんか？",

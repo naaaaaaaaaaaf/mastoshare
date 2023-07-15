@@ -7,7 +7,7 @@ export const useAddNewInstance = () => {
         instancesList,
         setInstancesList,
         setAddInstanceError,
-        setSuccessMessage
+        setSuccessMessage,
     ) => {
         try {
             const response = await fetch(
@@ -33,9 +33,7 @@ export const useAddNewInstance = () => {
                 setSuccessMessage(t('general.addInstanceSuccess'));
             }
         } catch {
-            setAddInstanceError(
-                t('general.addInstanceError'),
-            );
+            setAddInstanceError(t('general.addInstanceError'));
             setSuccessMessage(null);
         }
     };

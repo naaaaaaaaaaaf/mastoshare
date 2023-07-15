@@ -1,17 +1,17 @@
 {
     "homepage": {
-       "title": "Mastoshare",
-       "description": "Mastoshare is a share button service for Mastodon. You can seamlessly share your favorite content to instances. You can manage instances to share on the settings page and set your preferred instances.",
-       "embedTitle": "How to embed on your site",
-       "parameterTitle": "Parameter Options",
-       "parameterTableParameterText": "Parameter",
-       "parameterTableDescription": "Description",
-       "parameterTableDescriptionText": "Text to share",
-       "parameterTableDescriptionUrl": "URL to share",
-       "parameterTableDescriptionButton": "Text on the button",
-       "parameterTableRequired": "Required"
+        "title": "Mastoshare",
+        "description": "Mastoshare is a share button service for Mastodon. You can seamlessly share your favorite content to instances. You can manage instances to share on the settings page and set your preferred instances.",
+        "embedTitle": "How to embed on your site",
+        "parameterTitle": "Parameter Options",
+        "parameterTableParameterText": "Parameter",
+        "parameterTableDescription": "Description",
+        "parameterTableDescriptionText": "Text to share",
+        "parameterTableDescriptionUrl": "URL to share",
+        "parameterTableDescriptionButton": "Text on the button",
+        "parameterTableRequired": "Required"
     },
-    "settings":{
+    "settings": {
         "title": "Settings",
         "instance": "Instances",
         "addInstance": "Add new instance",
@@ -19,7 +19,7 @@
         "setPreferredInstance": "Set as preferred",
         "preferredInstance": "Preferred instance"
     },
-    "share":{
+    "share": {
         "title": "Trying to share…",
         "selectInstance": "Select instance to share",
         "notListed": "Not listed?",
@@ -37,4 +37,3 @@
         "addInstanceSuccess": "Successfully instance added"
     }
 }
-   

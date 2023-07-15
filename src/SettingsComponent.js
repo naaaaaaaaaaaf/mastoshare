@@ -38,7 +38,7 @@ function SettingsComponent() {
             instancesList,
             setInstancesList,
             setAddInstanceError,
-            setSuccessMessage
+            setSuccessMessage,
         );
     };
 
@@ -124,7 +124,7 @@ function SettingsComponent() {
                         className="p-2 bg-blue-500 text-white rounded-md"
                         onClick={handleAddInstance}
                     >
-                    {t('general.add')}
+                        {t('general.add')}
                     </button>
                 </div>
 
