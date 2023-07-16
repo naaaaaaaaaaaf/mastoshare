@@ -24,7 +24,6 @@ function ShareComponent() {
         const savedInstancesList = localStorage.getItem('instancesList');
         return savedInstancesList ? JSON.parse(savedInstancesList) : [];
     });
-    const [versionError] = useState(null);
     const [addInstanceError, setAddInstanceError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
@@ -41,23 +40,30 @@ function ShareComponent() {
     }
 
     useEffect(() => {
-        // ローカルストレージからMastodonインスタンスのURLを取得
-        const savedInstances = JSON.parse(
-            localStorage.getItem('instancesList'),
-        );
-        if (savedInstances) setInstancesList(savedInstances);
         const savedPreferredInstance =
             localStorage.getItem('preferredInstance');
         if (savedPreferredInstance) {
             setMastodonInstance(savedPreferredInstance);
+        } else if (instancesList.length > 0) {
+            setMastodonInstance(instancesList[0]);
         }
         // テキストパラメータとリファラー（アクセス元URL）を取得して設定
         const urlText = getParameterByName('text', location.search) || '';
         const urlReferrer = getParameterByName('url', location.search) || '';
         setCombinedValue(`${urlText}\n${urlReferrer}`);
+    }, [location, instancesList]);
 
-        if (!savedInstances || savedInstances.length === 0) setShowAddForm(true);
-    }, [location]);
+    useEffect(() => {
+        const savedInstances = JSON.parse(
+            localStorage.getItem('instancesList'),
+        );
+        if (!savedInstances || savedInstances.length === 0)
+            setShowAddForm(true);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('instancesList', JSON.stringify(instancesList));
+    }, [instancesList]);
 
     const handleAddInstance = () => {
         handleAddNewInstance(
@@ -71,24 +77,14 @@ function ShareComponent() {
         setMastodonInstance(newMastodonInstance);
         // フォームの入力フィールドをクリアする
         setNewMastodonInstance('');
+        // preferredInstanceにセットする
+        localStorage.setItem('preferredInstance', newMastodonInstance);
     };
 
-    useEffect(() => {
-        localStorage.setItem('instancesList', JSON.stringify(instancesList));
-    }, [instancesList]);
-
     const handleShare = () => {
-        if (!versionError) {
-            // MastodonインスタンスのURLをローカルストレージに保存
-            localStorage.setItem(
-                'instancesList',
-                JSON.stringify(instancesList),
-            );
-
-            // 指定したURLにジャンプ
-            const shareText = encodeURIComponent(combinedValue);
-            window.location.href = `https://${mastodonInstance}/share?text=${shareText}`;
-        }
+        // 指定したURLにジャンプ
+        const shareText = encodeURIComponent(combinedValue);
+        window.location.href = `https://${mastodonInstance}/share?text=${shareText}`;
     };
 
     return (
