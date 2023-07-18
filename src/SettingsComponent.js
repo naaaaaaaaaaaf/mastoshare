@@ -5,8 +5,10 @@ import {
     BsMastodon,
     BsPlusLg,
     BsStarFill,
+    BsArrowLeft
 } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
+import { useNavigate  } from 'react-router-dom';
 
 function SettingsComponent() {
     const { handleAddNewInstance } = useAddNewInstance();
@@ -16,7 +18,11 @@ function SettingsComponent() {
     const [preferredInstance, setPreferredInstance] = useState('');
     const [addInstanceError, setAddInstanceError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const navigate   = useNavigate ();
 
+    const goBack = () => {
+        navigate(-1);
+    };
     useEffect(() => {
         const savedInstances = JSON.parse(
             localStorage.getItem('instancesList'),
@@ -135,6 +141,11 @@ function SettingsComponent() {
                     {t('settings.preferredInstance')}
                 </h2>
                 <p>{preferredInstance}</p>
+
+                <button onClick={goBack} className="mt-4 w-full flex justify-center items-center py-2 bg-blue-500 text-white rounded">
+                    <BsArrowLeft className="mr-2" />
+                    <span>{t('general.back')}</span>
+                </button>
             </div>
         </div>
     );

@@ -93,11 +93,37 @@ function HomePage() {
                     </tbody>
                 </table>
                 <Link to="/settings">
-                    <p className="mt-2 text-gray-500 hover:underline flex items-center">
-                        <BsGearFill className="mr-1" />
+                    <button className="mt-4 w-full flex justify-center items-center py-2 bg-blue-500 text-white rounded">
+                        <BsGearFill className="mr-2" />
                         {t('general.settings')}
-                    </p>
+                    </button>
                 </Link>
+                <h1 className="text-2xl font-bold mt-4 mb-4">
+                    {t('homepage.browserExtensionTitle')}
+                </h1>
+                <div className="flex justify-center">
+                    <a
+                        href="https://chrome.google.com/webstore/detail/mastoshare/mfdneocoinldonfcdoicdjllngnakoga?hl=ja"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img
+                            className="mr-4"
+                            src="images/chrome-extension.png"
+                            alt="chrome web store"
+                        ></img>
+                    </a>
+                    <a
+                        href="https://addons.mozilla.org/ja/firefox/addon/mastoshare/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img
+                            src="images/firefox-addon.png"
+                            alt="firefox addon page"
+                        ></img>
+                    </a>
+                </div>
                 <div className="flex justify-center">
                     <a
                         href="https://github.com/naaaaaaaaaaaf/mastoshare"
