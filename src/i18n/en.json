@@ -9,7 +9,8 @@
         "parameterTableDescriptionText": "Text to share",
         "parameterTableDescriptionUrl": "URL to share",
         "parameterTableDescriptionButton": "Text on the button",
-        "parameterTableRequired": "Required"
+        "parameterTableRequired": "Required",
+        "browserExtensionTitle": "Browser Extension"
     },
     "settings": {
         "title": "Settings",
@@ -31,6 +32,7 @@
         "add": "Add",
         "yes": "Yes",
         "no": "No",
+        "back" : "Back",
         "addInstance": "Add new instance",
         "addInstanceErrorVersion": "Mastodon instance version is below 1.6.0",
         "addInstanceError": "Failed to fetch Mastodon instance information",

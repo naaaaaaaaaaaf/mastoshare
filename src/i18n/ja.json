@@ -9,7 +9,8 @@
         "parameterTableDescriptionText": "共有するテキスト",
         "parameterTableDescriptionUrl": "共有するURL",
         "parameterTableDescriptionButton": "ボタン上のテキスト",
-        "parameterTableRequired": "必須"
+        "parameterTableRequired": "必須",
+        "browserExtensionTitle": "ブラウザ拡張機能"
     },
     "settings": {
         "title": "設定",
@@ -31,6 +32,7 @@
         "add": "追加",
         "yes": "はい",
         "no": "いいえ",
+        "back" : "戻る",
         "addInstance": "インスタンスを追加",
         "addInstanceErrorVersion": "Mastodonのバージョンが1.6.0未満です。",
         "addInstanceError": "Mastodonインスタンス情報の取得に失敗しました。",
