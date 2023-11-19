@@ -39,7 +39,7 @@ function HomePage() {
                     {t('homepage.embedTitle')}
                 </h1>
                 <pre className="text-sm p-4 mb-4 bg-gray-800 text-white rounded-md overflow-auto">
-                    {`<div class="mastoshare-button" data-text="Hello, world!" data-url="https://example.com"></div>
+                    {`<div class="mastoshare" data-text="Hello, world!" data-url="https://example.com"></div>
 <link rel="stylesheet" href="https://mastoshare.net/css/button.css">
 <script src="https://mastoshare.net/js/button.js"></script>`}
                 </pre>

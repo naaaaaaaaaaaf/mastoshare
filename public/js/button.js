@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const buttonText = button.getAttribute('data-button-text') || 'Share on Mastodon';
         // 新しいa要素を作成
         const link = document.createElement('a');
-        link.href = `http://localhost:3000/share?text=${text}&url=${url}`;
+        link.href = `https://mastoshare.net/share?text=${text}&url=${url}`;
         link.textContent = buttonText;
         link.className = 'mastoshare-button';  // CSSクラスを追加
 
