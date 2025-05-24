@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAddNewInstance } from './useAddNewInstance';
+import { useAddNewInstance } from './useAddNewInstance.jsx';
 import {
     BsFillGearFill,
     BsMastodon,

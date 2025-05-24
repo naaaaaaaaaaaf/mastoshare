@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ShareComponent from './ShareComponent'; // 先ほど作成したMyComponentをインポートします
-import SettingsComponent from './SettingsComponent';
-import HomePage from './HomePage';
+import ShareComponent from './ShareComponent.jsx';
+import SettingsComponent from './SettingsComponent.jsx';
+import HomePage from './HomePage.jsx';
 
 function App() {
     return (
